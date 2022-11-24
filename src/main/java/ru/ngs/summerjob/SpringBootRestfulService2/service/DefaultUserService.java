@@ -3,6 +3,7 @@ package ru.ngs.summerjob.SpringBootRestfulService2.service;
 import org.springframework.stereotype.Service;
 import ru.ngs.summerjob.SpringBootRestfulService2.dto.UserDto;
 import ru.ngs.summerjob.SpringBootRestfulService2.entity.User;
+import ru.ngs.summerjob.SpringBootRestfulService2.exception.UserNotFoundException;
 import ru.ngs.summerjob.SpringBootRestfulService2.exception.ValidationException;
 import ru.ngs.summerjob.SpringBootRestfulService2.repository.UserRepository;
 
@@ -33,12 +34,12 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public UserDto findByLogin(String login) {
+    public UserDto findByLogin(String login) throws UserNotFoundException {
         User user = userRepository.findByLogin(login);
         if (user != null) {
             return userConverter.fromUserToUserDto(user);
         } else {
-            return null;                                    // лучше не возвращать - переделать под Exception или попробовать Optional
+            throw new UserNotFoundException(login);                                    // лучше не возвращать - переделать под Exception или попробовать Optional
         }
     }
 

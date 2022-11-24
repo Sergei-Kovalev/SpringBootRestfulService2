@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.ngs.summerjob.SpringBootRestfulService2.dto.UserDto;
+import ru.ngs.summerjob.SpringBootRestfulService2.exception.UserNotFoundException;
 import ru.ngs.summerjob.SpringBootRestfulService2.exception.ValidationException;
 import ru.ngs.summerjob.SpringBootRestfulService2.service.UserService;
 
@@ -33,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/findByLogin")
-    public UserDto findByLogin(@RequestParam String login) {
+    public UserDto findByLogin(@RequestParam String login) throws UserNotFoundException {
         logger.info("Find user with a login: " + login);
         return userService.findByLogin(login);
     }
