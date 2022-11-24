@@ -8,7 +8,6 @@ import ru.ngs.summerjob.SpringBootRestfulService2.exception.ValidationException;
 import ru.ngs.summerjob.SpringBootRestfulService2.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
