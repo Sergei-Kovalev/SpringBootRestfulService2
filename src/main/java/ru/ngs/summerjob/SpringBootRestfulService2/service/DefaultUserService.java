@@ -8,6 +8,7 @@ import ru.ngs.summerjob.SpringBootRestfulService2.exception.ValidationException;
 import ru.ngs.summerjob.SpringBootRestfulService2.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,12 +36,8 @@ public class DefaultUserService implements UserService {
 
     @Override
     public UserDto findByLogin(String login) throws UserNotFoundException {
-        User user = userRepository.findByLogin(login);
-        if (user != null) {
-            return userConverter.fromUserToUserDto(user);
-        } else {
-            throw new UserNotFoundException(login);                                    // лучше не возвращать - переделать под Exception или попробовать Optional
-        }
+        User user = userRepository.findByLogin(login).orElseThrow(() -> new UserNotFoundException(login));
+        return userConverter.fromUserToUserDto(user);
     }
 
     @Override
