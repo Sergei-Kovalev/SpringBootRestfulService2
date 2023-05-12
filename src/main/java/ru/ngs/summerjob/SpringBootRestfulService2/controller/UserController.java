@@ -21,6 +21,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping
+    public String test() {
+        return "test";
+    }
+
     @PostMapping("/save")
     public UserDto saveUser(@RequestBody UserDto userDto) throws ValidationException {
         logger.info("Save user:" + userDto);
