@@ -8,6 +8,6 @@ public class UserNotFoundException extends Exception {
     }
 
     public String getMessage() {
-        return String.format("The entered login: \"%s\" is incorrect", login);
+        return String.format("The entered login: \"%s\" is incorrect!!!", login);
     }
 }
